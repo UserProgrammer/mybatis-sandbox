@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+   <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+     <property name="dataSource" ref="dataSource" />
+     <property name="configLocation" value="classpath:mybatis-config.xml" />
+   </bean>
+   <!-- DAOs -->
+   <bean id="myBatisDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+     <property name="mapperInterface" value="com.mybatissandbox.dao.IMyBatisDao" />
+     <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+   </bean>
+
+   <!-- Controllers -->
+   <bean id="myBatisController" class="com.mybatissandbox.controllers.MyBatisController">
+     <property name="myBatisHandler" ref="myBatisHandler" />
+   </bean>
+
+   <!-- Handlers -->
+   <bean id="myBatisHandler" class="com.mybatissandbox.handlers.MyBatisHandler">
+     <property name="myBatisDao" ref="myBatisDao" />
+   </bean>
+</beans>

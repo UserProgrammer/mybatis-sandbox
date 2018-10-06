@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="dataSource"
+        class="org.apache.tomcat.jdbc.pool.DataSource"
+        p:driverClassName="com.mysql.jdbc.Driver"
+        p:url="jdbc:mysql://${database.host}:${database.port}/${database.instance}?serverTimezone=UTC"
+        p:username="${database.user}"
+        p:password="${database.password}"
+        p:validationQuery="select 1" />
+</beans>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration>
+  <Properties>
+    <Property name="filepath">/home/michael/development/mybatis-sandbox/logs</Property>
+  </Properties>
+
+  <Appenders>
+    <File name="LOGFILE" fileName="${filepath}/mybatis-sandbox.log">
+      <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
+    </File>
+  </Appenders>
+
+  <!-- TODO: Fix logging configuration so that log statements are not duplicated. -->
+
+  <Loggers>
+    <Logger name="com.mybatissandbox" level="debug">
+      <AppenderRef ref="LOGFILE" />
+    </Logger>
+
+    <Root level="info">
+      <AppenderRef ref="LOGFILE" />
+    </Root>
+  </Loggers>
+</Configuration>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mybatissandbox.dao.IMyBatisDao">
+  <select id="executeMethodInMyBatis" resultType="int">
+    <bind name="evenNumbersOnly" value="filters.get('evenNumbersOnly')" />
+    <bind name="positiveNumbersOnly" value="filters.get('positiveNumbersOnly')" />
+    select *
+    from (
+      select 1 as number
+        union select 2
+        union select 3
+        union select 4
+        union select -1
+        union select -2
+        union select -3
+        union select -4
+    ) as numbers
+    where 1 = 1
+    <if test="evenNumbersOnly == true">
+      and number % 2 = 0
+    </if>
+    <if test="positiveNumbersOnly == true">
+      and number &lt; 0
+    </if>
+  </select>
+</mapper>
